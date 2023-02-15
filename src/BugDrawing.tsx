@@ -1,13 +1,44 @@
+const RIGHT_ANTANI = (
+  <div
+    style={{
+      width: '30px',
+      height: '1px',
+      background: 'black',
+      position: 'absolute',
+      top: '65px',
+      right: '135px',
+      rotate: '-80deg',
+      transformOrigin: 'left botton',
+    }}
+  />
+);
+
+const LEFT_ANTANI = (
+  <div
+    style={{
+      width: '30px',
+      height: '1px',
+      background: 'black',
+      position: 'absolute',
+      top: '65px',
+      right: '155px',
+      rotate: '-105deg',
+      transformOrigin: 'left botton',
+    }}
+  />
+);
+
 const HEAD = (
   <div
     style={{
-      width: '55px',
-      height: '55px',
+      width: '25px',
+      height: '35px',
       borderRadius: '100%',
+      backgroundColor: 'black',
       border: '10px solid black',
       position: 'absolute',
-      top: '50px',
-      right: '120px',
+      top: '70px',
+      right: '135px',
     }}
   />
 );
@@ -16,29 +47,17 @@ const BODY = (
   <div
     style={{
       width: '100px',
-      height: '130px',
+      height: '180px',
       borderRadius: '100%',
-      backgroundColor: 'black',
+      backgroundColor: 'red',
       border: '10px solid black',
       position: 'absolute',
       top: '120px',
       right: '95px',
+      zIndex: 100,
     }}
   />
 );
-
-// const BODY = (
-//   <div
-//     style={{
-//       width: '10px',
-//       height: '100px',
-//       background: 'black',
-//       position: 'absolute',
-//       top: '120px',
-//       right: 0,
-//     }}
-//   />
-// );
 
 const RIGHT_ARM = (
   <div
@@ -51,6 +70,35 @@ const RIGHT_ARM = (
       right: '50px',
       rotate: '-30deg',
       transformOrigin: 'left botton',
+    }}
+  />
+);
+
+const RIGHT_MIDDLE_ARM = (
+  <div
+    style={{
+      width: '90px',
+      height: '10px',
+      background: 'black',
+      position: 'absolute',
+      top: '200px',
+      right: '50px',
+      rotate: '-15deg',
+      transformOrigin: 'left botton',
+    }}
+  />
+);
+
+const RIGHT_MIDDLE_HAND = (
+  <div
+    style={{
+      width: '15px',
+      height: '30px',
+      borderRadius: '100%',
+      border: '5px solid black',
+      position: 'absolute',
+      top: '170px',
+      right: '30px',
     }}
   />
 );
@@ -84,6 +132,35 @@ const LEFT_ARM = (
   />
 );
 
+const LEFT_MIDDLE_ARM = (
+  <div
+    style={{
+      width: '90px',
+      height: '10px',
+      background: 'black',
+      position: 'absolute',
+      top: '200px',
+      right: '170px',
+      rotate: '15deg',
+      transformOrigin: 'right botton',
+    }}
+  />
+);
+
+const LEFT_MIDDLE_HAND = (
+  <div
+    style={{
+      width: '15px',
+      height: '30px',
+      borderRadius: '100%',
+      border: '5px solid black',
+      position: 'absolute',
+      top: '170px',
+      right: '255px',
+    }}
+  />
+);
+
 const LEFT_HAND = (
   <div
     style={{
@@ -107,7 +184,7 @@ const RIGHT_LEG = (
       position: 'absolute',
       top: '260px',
       right: '50px',
-      rotate: '60deg',
+      rotate: '20deg',
       transformOrigin: 'left botton',
     }}
   />
@@ -121,8 +198,8 @@ const RIGHT_FOOT = (
       borderRadius: '100%',
       border: '5px solid black',
       position: 'absolute',
-      top: '285px',
-      right: '45px',
+      top: '255px',
+      right: '20px',
       rotate: '55deg',
     }}
   />
@@ -137,7 +214,7 @@ const LEFT_LEG = (
       position: 'absolute',
       top: '260px',
       right: '140px',
-      rotate: '-60deg',
+      rotate: '-20deg',
       transformOrigin: 'right botton',
     }}
   />
@@ -151,24 +228,30 @@ const LEFT_FOOT = (
       borderRadius: '100%',
       border: '5px solid black',
       position: 'absolute',
-      top: '285px',
-      right: '220px',
+      top: '255px',
+      right: '245px',
       rotate: '145deg',
     }}
   />
 );
 
 export const BODY_PARTS = [
+  RIGHT_ANTANI,
+  LEFT_ANTANI,
   HEAD,
   BODY,
   RIGHT_ARM,
   LEFT_ARM,
+  LEFT_MIDDLE_ARM,
+  RIGHT_MIDDLE_ARM,
   RIGHT_LEG,
   LEFT_LEG,
-  RIGHT_HAND,
   LEFT_HAND,
-  RIGHT_FOOT,
+  RIGHT_HAND,
+  RIGHT_MIDDLE_HAND,
+  LEFT_MIDDLE_HAND,
   LEFT_FOOT,
+  RIGHT_FOOT,
 ];
 
 type BugDrawingProps = {
