@@ -22,8 +22,8 @@ export default function Keyboard({
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(60px, 1fr))',
-          gap: '.4rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(65px, 1fr))',
+          gap: '.5rem',
         }}
       >
         {TOP_KEY_ROW.map((key) => {
@@ -48,6 +48,7 @@ export default function Keyboard({
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, min(75px))',
           gap: '.5rem',
+          paddingLeft: '1rem',
         }}
       >
         {MID_KEY_ROW.map((key) => {
@@ -70,8 +71,9 @@ export default function Keyboard({
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, min(80px)',
+          gridTemplateColumns: 'repeat(auto-fit, min(75px)',
           gap: '.5rem',
+          paddingLeft: '2rem',
         }}
       >
         {BOT_KEY_ROW.map((key) => {
