@@ -1,25 +1,124 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect, useCallback } from 'react';
+import { words } from './wordList';
+import BugDrawing from './BugDrawing';
+import Keyboard from './Keyboard';
+import BugWord from './BugWord';
+import { BODY_PARTS } from './BugDrawing';
+
+import Cloud from './Cloud';
+
+function getWord() {
+  return words[Math.floor(Math.random() * words.length)];
+}
 
 function App() {
+  const [wordToGuess, setWordToGuess] = useState<string>(getWord());
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+
+  const incorrectLetters = guessedLetters.filter(
+    (letter) => !wordToGuess.includes(letter)
+  );
+
+  const isLoser = incorrectLetters.length >= BODY_PARTS.length;
+  const isWinner = wordToGuess
+    .split('')
+    .every((letter) => guessedLetters.includes(letter));
+
+  const addGuessedLetter = useCallback(
+    (letter: string) => {
+      if (guessedLetters.includes(letter) || isLoser || isWinner) return;
+
+      setGuessedLetters((currentLetters) => [...currentLetters, letter]);
+    },
+    [guessedLetters, isWinner, isLoser]
+  );
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key;
+
+      if (!key.match(/^[a-z]$/)) return;
+
+      e.preventDefault();
+      addGuessedLetter(key);
+    };
+
+    document.addEventListener('keypress', handler);
+
+    return () => {
+      document.removeEventListener('keypress', handler);
+    };
+  }, [guessedLetters, addGuessedLetter]);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key;
+
+      if (key !== 'Enter') return;
+
+      e.preventDefault();
+      setGuessedLetters([]);
+      setWordToGuess(getWord());
+    };
+
+    document.addEventListener('keypress', handler);
+
+    return () => {
+      document.removeEventListener('keypress', handler);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div
+        style={{
+          maxWidth: '800px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2rem',
+          margin: '0 auto',
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ fontSize: '2rem', textAlign: 'center' }}>
+          {!isWinner && !isLoser && (
+            <div>
+              <h3>Let's Play</h3>
+              <h1>Beat The Bug!</h1>
+            </div>
+          )}
+          {isWinner && (
+            <div>
+              <h1>Winner!</h1> <h3>Refresh to play again</h3>
+            </div>
+          )}
+          {isLoser && (
+            <div>
+              <h1>Nice Try</h1>
+              <h3>Refresh to play again</h3> <Cloud />
+            </div>
+          )}
+        </div>
+
+        <BugDrawing numberOfGuesses={incorrectLetters.length} />
+
+        <BugWord
+          reveal={isLoser}
+          guessedLetters={guessedLetters}
+          wordToGuess={wordToGuess}
+        />
+        <div style={{ alignSelf: 'stretch' }}>
+          <Keyboard
+            disabled={isWinner || isLoser}
+            activeLetters={guessedLetters.filter((letter) =>
+              wordToGuess.includes(letter)
+            )}
+            inactiveLetters={incorrectLetters}
+            addGuessedLetter={addGuessedLetter}
+          />
+        </div>
+      </div>
+    </>
   );
 }
 

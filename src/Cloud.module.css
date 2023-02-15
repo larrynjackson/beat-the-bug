@@ -1,0 +1,40 @@
+body {
+  background-color: none;
+}
+.cloud {
+  position: fixed;
+  margin-top: 70px;
+  width: 250px;
+  height: 100px;
+  background: #e0f0fb;
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  margin-top: 50px;
+  margin-left: 300px;
+}
+
+.cloud::after,
+.cloud::before {
+  content: '';
+  position: relative;
+  display: inline-block;
+  background: inherit;
+  border-radius: inherit;
+}
+.cloud::after {
+  width: 100px;
+  height: 100px;
+  top: -220px;
+  left: 50px;
+  text-align: center;
+  text-indent: 10%;
+  font-size: 2rem;
+  content: 'HaHa Got You!';
+}
+
+.cloud::before {
+  width: 180px;
+  height: 180px;
+  top: -70px;
+  left: 130px;
+}
