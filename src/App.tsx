@@ -104,7 +104,7 @@ function App() {
         )}
         {isWinner && (
           <div>
-            <h1>Winner!</h1> <h3>Refresh to play again</h3>
+            <h1>Winner!</h1> <h3>Enter key to play again</h3>
           </div>
         )}
         {isLoser && (
