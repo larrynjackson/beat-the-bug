@@ -6,14 +6,12 @@ import BugWord from './BugWord';
 import { BODY_PARTS } from './BugDrawing';
 
 import Cloud from './Cloud';
-
-function getWord() {
-  return words[Math.floor(Math.random() * words.length)];
-}
+import WordFileReader from './filesystem/WordFileReader';
 
 function App() {
-  const [wordToGuess, setWordToGuess] = useState<string>(getWord());
+  const [wordList, setWordList] = useState<string[]>(words);
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  const [wordToGuess, setWordToGuess] = useState<string>(getWord());
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
@@ -32,6 +30,10 @@ function App() {
     },
     [guessedLetters, isWinner, isLoser]
   );
+
+  function getWord() {
+    return wordList[Math.floor(Math.random() * wordList.length)];
+  }
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -58,7 +60,7 @@ function App() {
 
       e.preventDefault();
       setGuessedLetters([]);
-      setWordToGuess(getWord());
+      setWordToGuess(wordList[Math.floor(Math.random() * wordList.length)]);
     };
 
     document.addEventListener('keypress', handler);
@@ -66,10 +68,53 @@ function App() {
     return () => {
       document.removeEventListener('keypress', handler);
     };
-  }, []);
+  }, [wordList]);
+
+  function handleUpdateList(newList: string[]) {
+    setGuessedLetters([]);
+    setWordList(newList);
+
+    setWordToGuess(getWord());
+  }
 
   return (
     <>
+      <div
+        style={{
+          width: '100%',
+          display: 'grid',
+          flexDirection: 'column',
+          gap: '1rem',
+          marginLeft: '200px',
+          alignItems: 'right',
+        }}
+      >
+        <WordFileReader handleUpdateList={handleUpdateList} />
+        <p style={{ fontSize: '2rem', marginTop: 0 }}>
+          File format ex: (dog, cat, hat, rat) Press Enter after loading!
+        </p>
+      </div>
+
+      <div style={{ fontSize: '2rem', textAlign: 'center' }}>
+        {!isWinner && !isLoser && (
+          <div>
+            <h3>Let's Play</h3>
+            <h1>Beat The Bug!</h1>
+          </div>
+        )}
+        {isWinner && (
+          <div>
+            <h1>Winner!</h1> <h3>Refresh to play again</h3>
+          </div>
+        )}
+        {isLoser && (
+          <div>
+            <h1>Nice Try</h1>
+            <h3>Refresh to play again</h3> <Cloud />
+          </div>
+        )}
+      </div>
+
       <div
         style={{
           maxWidth: '800px',
@@ -80,26 +125,6 @@ function App() {
           alignItems: 'center',
         }}
       >
-        <div style={{ fontSize: '2rem', textAlign: 'center' }}>
-          {!isWinner && !isLoser && (
-            <div>
-              <h3>Let's Play</h3>
-              <h1>Beat The Bug!</h1>
-            </div>
-          )}
-          {isWinner && (
-            <div>
-              <h1>Winner!</h1> <h3>Refresh to play again</h3>
-            </div>
-          )}
-          {isLoser && (
-            <div>
-              <h1>Nice Try</h1>
-              <h3>Refresh to play again</h3> <Cloud />
-            </div>
-          )}
-        </div>
-
         <BugDrawing numberOfGuesses={incorrectLetters.length} />
 
         <BugWord

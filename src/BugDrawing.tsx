@@ -1,5 +1,6 @@
 const RIGHT_ANTANI = (
   <div
+    key={10}
     style={{
       width: '30px',
       height: '1px',
@@ -15,6 +16,7 @@ const RIGHT_ANTANI = (
 
 const LEFT_ANTANI = (
   <div
+    key={20}
     style={{
       width: '30px',
       height: '1px',
@@ -30,6 +32,7 @@ const LEFT_ANTANI = (
 
 const HEAD = (
   <div
+    key={30}
     style={{
       width: '25px',
       height: '35px',
@@ -45,6 +48,7 @@ const HEAD = (
 
 const BODY = (
   <div
+    key={40}
     style={{
       width: '100px',
       height: '180px',
@@ -61,6 +65,7 @@ const BODY = (
 
 const RIGHT_ARM = (
   <div
+    key={50}
     style={{
       width: '90px',
       height: '10px',
@@ -76,6 +81,7 @@ const RIGHT_ARM = (
 
 const RIGHT_MIDDLE_ARM = (
   <div
+    key={60}
     style={{
       width: '90px',
       height: '10px',
@@ -91,6 +97,7 @@ const RIGHT_MIDDLE_ARM = (
 
 const RIGHT_MIDDLE_HAND = (
   <div
+    key={70}
     style={{
       width: '15px',
       height: '30px',
@@ -105,6 +112,7 @@ const RIGHT_MIDDLE_HAND = (
 
 const RIGHT_HAND = (
   <div
+    key={80}
     style={{
       width: '15px',
       height: '30px',
@@ -119,6 +127,7 @@ const RIGHT_HAND = (
 
 const LEFT_ARM = (
   <div
+    key={90}
     style={{
       width: '90px',
       height: '10px',
@@ -134,6 +143,7 @@ const LEFT_ARM = (
 
 const LEFT_MIDDLE_ARM = (
   <div
+    key={100}
     style={{
       width: '90px',
       height: '10px',
@@ -149,6 +159,7 @@ const LEFT_MIDDLE_ARM = (
 
 const LEFT_MIDDLE_HAND = (
   <div
+    key={110}
     style={{
       width: '15px',
       height: '30px',
@@ -163,6 +174,7 @@ const LEFT_MIDDLE_HAND = (
 
 const LEFT_HAND = (
   <div
+    key={120}
     style={{
       width: '15px',
       height: '30px',
@@ -177,6 +189,7 @@ const LEFT_HAND = (
 
 const RIGHT_LEG = (
   <div
+    key={130}
     style={{
       width: '110px',
       height: '10px',
@@ -192,6 +205,7 @@ const RIGHT_LEG = (
 
 const RIGHT_FOOT = (
   <div
+    key={140}
     style={{
       width: '25px',
       height: '50px',
@@ -207,6 +221,7 @@ const RIGHT_FOOT = (
 
 const LEFT_LEG = (
   <div
+    key={150}
     style={{
       width: '110px',
       height: '10px',
@@ -222,6 +237,7 @@ const LEFT_LEG = (
 
 const LEFT_FOOT = (
   <div
+    key={160}
     style={{
       width: '25px',
       height: '50px',

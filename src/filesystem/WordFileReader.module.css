@@ -1,0 +1,28 @@
+.btn {
+  border: 3px solid black;
+  background: none;
+  width: 500px;
+  font-size: 2rem;
+  padding: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+}
+
+.btn:hover {
+  background-color: hsl(200, 100%, 90%);
+}
+
+/* .btn.active {
+  background-color: hsl(200, 100%, 50%);
+  color: white;
+}
+
+.btn.inactive {
+  opacity: 0.3;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: hsl(200, 100%, 90%);
+} */

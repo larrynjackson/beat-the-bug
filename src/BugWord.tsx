@@ -9,8 +9,6 @@ export default function BugWord({
   wordToGuess,
   reveal = false,
 }: BugWordProps) {
-  //const word = 'test';
-  //const guessedLetters = ['e', 't', 'g'];
   return (
     <div
       style={{
