@@ -3,7 +3,7 @@ import { words } from './wordList';
 import BugDrawing from './BugDrawing';
 import Keyboard from './Keyboard';
 import BugWord from './BugWord';
-import { BODY_PARTS } from './BugDrawing';
+import { NUMBER_OF_PARTS } from './BugDrawing';
 
 import Cloud from './Cloud';
 import WordFileReader from './filesystem/WordFileReader';
@@ -17,7 +17,7 @@ function App() {
     (letter) => !wordToGuess.includes(letter)
   );
 
-  const isLoser = incorrectLetters.length >= BODY_PARTS.length;
+  const isLoser = incorrectLetters.length >= NUMBER_OF_PARTS;
   const isWinner = wordToGuess
     .split('')
     .every((letter) => guessedLetters.includes(letter));
