@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
+import { DropDownMenu } from './components/Dropdown';
+
 import LadyBugDrawing from './components/LadyBugDrawing';
 import { LADYBUG_PARTS } from './components/LadyBugDrawing';
 import CrazyBugDrawing from './components/CrazyBugDrawing';
@@ -11,11 +13,13 @@ import { GOOFYBUG_PARTS } from './components/GoofyBugDrawing';
 import Keyboard from './components/Keyboard';
 import BugWord from './components/BugWord';
 
-import { Menu } from './components/Menu';
-
 import Cloud from './components/Cloud';
 import WordFileReader from './filesystem/WordFileReader';
 import { kindergarten } from './data/kindergarten';
+import { stateWords } from './data/stateList';
+import { words } from './data/wordList';
+import { countryWords } from './data/countryList';
+import { animalWords } from './data/amimalList';
 
 // temp site: https://neon-horse-18b33a.netlify.app
 
@@ -24,7 +28,17 @@ function App() {
   const [bugSize, setBugSize] = useState(LADYBUG_PARTS);
   const [wordList, setWordList] = useState<string[]>(kindergarten);
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
-  const [wordToGuess, setWordToGuess] = useState<string>(getWord());
+  const [wordToGuess, setWordToGuess] = useState<string>(
+    wordList[Math.floor(Math.random() * wordList.length)]
+      .toLowerCase()
+      .replace(/\s/g, '')
+  );
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
@@ -43,13 +57,6 @@ function App() {
     },
     [guessedLetters, isWinner, isLoser]
   );
-
-  function getWord() {
-    let word =
-      wordList[Math.floor(Math.random() * wordList.length)].toLowerCase();
-    word = word.replace(/\s/g, '');
-    return word;
-  }
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -74,7 +81,11 @@ function App() {
       if (key !== 'Enter') return;
       e.preventDefault();
       setGuessedLetters([]);
-      setWordToGuess(getWord());
+      setWordToGuess(
+        wordList[Math.floor(Math.random() * wordList.length)]
+          .toLowerCase()
+          .replace(/\s/g, '')
+      );
     };
 
     document.addEventListener('keypress', handler);
@@ -85,11 +96,13 @@ function App() {
   }, [wordList]);
 
   function handleUpdateList(newList: string[]) {
+    setOpen(!open);
     setWordList(newList);
     alert('New list is ready. Press the enter key to complete the change.');
   }
 
   function handleUpdateBug(bug: string) {
+    setOpen(!open);
     setGuessedLetters([]);
     switch (bug) {
       case 'LadyBug':
@@ -131,15 +144,71 @@ function App() {
           }}
         >
           <WordFileReader handleUpdateList={handleUpdateList} />
-          <p style={{ fontSize: '2rem', marginTop: 0 }}>
+          <p style={{ fontSize: '2rem', marginTop: '0' }}>
             File format ex: (dog, cat, hat, rat) Press Enter after loading!
           </p>
         </div>
 
-        <div style={{ textAlign: 'right', paddingRight: '100px' }}>
-          <Menu
-            handleUpdateList={handleUpdateList}
-            handleUpdateBug={handleUpdateBug}
+        <div style={{ textAlign: 'right', paddingRight: '75px' }}>
+          <DropDownMenu
+            open={open}
+            trigger={
+              <button
+                style={{ width: '250px', padding: '10px', fontSize: '30px' }}
+                onClick={handleOpen}
+              >
+                Menu
+              </button>
+            }
+            menu={[
+              <div
+                style={{
+                  backgroundColor: 'lightgray',
+
+                  textAlign: 'center',
+                  pointerEvents: 'none',
+                }}
+              >
+                <span>words</span>
+              </div>,
+
+              <button onClick={() => handleUpdateList(kindergarten)}>
+                Default (K)
+              </button>,
+              <button onClick={() => handleUpdateList(words)}>
+                1st grade
+              </button>,
+              <button onClick={() => handleUpdateList(animalWords)}>
+                Animals
+              </button>,
+              <button onClick={() => handleUpdateList(stateWords)}>
+                States
+              </button>,
+              <button onClick={() => handleUpdateList(countryWords)}>
+                Countries
+              </button>,
+              <div
+                style={{
+                  backgroundColor: 'lightgray',
+
+                  textAlign: 'center',
+                  pointerEvents: 'none',
+                }}
+              >
+                <span>bugs</span>
+              </div>,
+              <button onClick={() => handleUpdateBug('LadyBug')}>
+                LadyBug
+              </button>,
+
+              <button onClick={() => handleUpdateBug('CrazyBug')}>
+                CrazyBug
+              </button>,
+
+              <button onClick={() => handleUpdateBug('GoofyBug')}>
+                GoofyBug
+              </button>,
+            ]}
           />
         </div>
       </div>
