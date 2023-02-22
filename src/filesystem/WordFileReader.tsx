@@ -56,11 +56,11 @@ function cleanInputData(fileData: string): string[] {
 
 type WordFileReaderProps = {
   // eslint-disable-next-line
-  handleUpdateList: ([]) => void;
+  handleUpdateFileList: ([]) => void;
 };
 
 export default function WordFileReader({
-  handleUpdateList,
+  handleUpdateFileList,
 }: WordFileReaderProps) {
   function parseWordFile(fileData: string) {
     const cleanResult = cleanInputData(fileData);
@@ -68,7 +68,7 @@ export default function WordFileReader({
       alert('File contains errors. Word list was not changed.');
     } else {
       const words = cleanResult[0].split(',');
-      handleUpdateList(words);
+      handleUpdateFileList(words);
     }
   }
 

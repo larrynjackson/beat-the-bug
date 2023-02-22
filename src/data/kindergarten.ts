@@ -1,7 +1,7 @@
 export const kindergarten = [
   'is',
   'the',
-  'mon',
+  'man',
   'dad',
   'can',
   'see',

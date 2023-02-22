@@ -61,6 +61,7 @@ function App() {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const key = e.key;
+
       if (!key.match(/^[a-z]$/)) return;
 
       e.preventDefault();
@@ -95,6 +96,11 @@ function App() {
     };
   }, [wordList]);
 
+  function handleUpdateFileList(newList: string[]) {
+    setWordList(newList);
+    alert('New list is ready. Press the enter key to complete the change.');
+  }
+
   function handleUpdateList(newList: string[]) {
     setOpen(!open);
     setWordList(newList);
@@ -124,6 +130,17 @@ function App() {
     alert('New bug is ready.');
   }
 
+  function playAgain() {
+    console.log('play again');
+
+    setGuessedLetters([]);
+    setWordToGuess(
+      wordList[Math.floor(Math.random() * wordList.length)]
+        .toLowerCase()
+        .replace(/\s/g, '')
+    );
+  }
+
   return (
     <>
       <div
@@ -143,7 +160,7 @@ function App() {
             alignItems: 'right',
           }}
         >
-          <WordFileReader handleUpdateList={handleUpdateList} />
+          <WordFileReader handleUpdateFileList={handleUpdateFileList} />
           <p style={{ fontSize: '2rem', marginTop: '0' }}>
             File format ex: (dog, cat, hat, rat) Press Enter after loading!
           </p>
@@ -232,7 +249,12 @@ function App() {
           </div>
         )}
       </div>
-
+      <button
+        style={{ marginLeft: '20px', fontSize: '2rem' }}
+        onClick={playAgain}
+      >
+        Play again
+      </button>
       <div
         style={{
           maxWidth: '800px',
