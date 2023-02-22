@@ -12,17 +12,3 @@
 .btn:hover {
   background-color: hsl(200, 100%, 90%);
 }
-
-/* .btn.active {
-  background-color: hsl(200, 100%, 50%);
-  color: white;
-}
-
-.btn.inactive {
-  opacity: 0.3;
-}
-
-.btn:hover,
-.btn:focus {
-  background-color: hsl(200, 100%, 90%);
-} */

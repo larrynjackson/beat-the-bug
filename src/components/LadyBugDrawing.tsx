@@ -1,4 +1,4 @@
-import { Playback, point } from './components/Playback';
+import { Playback, point } from './Playback';
 import {
   leftWing,
   rightWing,
@@ -16,15 +16,17 @@ import {
   hiHeadParts,
   hiEyeParts,
   lowEyeParts,
-} from './BugData';
+} from '../data/LadyBugData';
 
-export const NUMBER_OF_PARTS = 16;
+export const LADYBUG_PARTS = 16;
 
-type BugDrawingProps = {
+type LadyBugDrawingProps = {
   numberOfGuesses: number;
 };
 
-export default function BugDrawing({ numberOfGuesses }: BugDrawingProps) {
+export default function LadyBugDrawing({
+  numberOfGuesses,
+}: LadyBugDrawingProps) {
   let parts = [];
   parts.push([{ x: 0, y: 0 }]); //0
   parts.push(hiHeadParts); //1 black

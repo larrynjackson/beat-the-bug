@@ -1,4 +1,4 @@
-import styles from './Keyboard.module.css';
+import styles from '../css/Keyboard.module.css';
 
 const TOP_KEY_ROW = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'];
 const MID_KEY_ROW = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'];

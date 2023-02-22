@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Cloud.module.css';
+import styles from '../css/Cloud.module.css';
 
 export default function Cloud() {
   return (

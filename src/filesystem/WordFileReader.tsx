@@ -1,4 +1,4 @@
-import styles from './WordFileReader.module.css';
+import styles from '../css/WordFileReader.module.css';
 
 function isAlpha(ch: string): boolean {
   return (
