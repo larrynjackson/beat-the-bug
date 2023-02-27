@@ -2,13 +2,17 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { DropDownMenu } from './components/Dropdown';
 
-import LadyBugDrawing from './components/LadyBugDrawing';
-import { LADYBUG_PARTS } from './components/LadyBugDrawing';
-import CrazyBugDrawing from './components/CrazyBugDrawing';
-import { CRAZYBUG_PARTS } from './components/CrazyBugDrawing';
+import LadyBugDraw2 from './components/LadyBugDraw2';
+import { LADYBUG_PARTS } from './components/LadyBugDraw2';
 
-import GoofyBugDrawing from './components/GoofyBugDrawing';
-import { GOOFYBUG_PARTS } from './components/GoofyBugDrawing';
+import CrazyBugDraw2 from './components/CrazyBugDraw2';
+import { CRAZYBUG_PARTS } from './components/CrazyBugDraw2';
+
+import GoofyBugDraw2 from './components/GoofyBugDraw2';
+import { GOOFYBUG_PARTS } from './components/GoofyBugDraw2';
+
+import HoboAntDraw2 from './components/HoboAntDraw2';
+import { HOBOANT_PARTS } from './components/HoboAntDraw2';
 
 import Keyboard from './components/Keyboard';
 import BugWord from './components/BugWord';
@@ -123,6 +127,10 @@ function App() {
         setActiveBug(bug);
         setBugSize(GOOFYBUG_PARTS);
         break;
+      case 'HoboBug':
+        setActiveBug(bug);
+        setBugSize(HOBOANT_PARTS);
+        break;
       default:
         setActiveBug('LadyBug');
         setBugSize(LADYBUG_PARTS);
@@ -225,6 +233,10 @@ function App() {
               <button onClick={() => handleUpdateBug('GoofyBug')}>
                 GoofyBug
               </button>,
+
+              <button onClick={() => handleUpdateBug('HoboBug')}>
+                HoboAnt
+              </button>,
             ]}
           />
         </div>
@@ -266,13 +278,17 @@ function App() {
         }}
       >
         {activeBug === 'LadyBug' && (
-          <LadyBugDrawing numberOfGuesses={incorrectLetters.length} />
+          <LadyBugDraw2 numberOfGuesses={incorrectLetters.length} />
         )}
+
         {activeBug === 'CrazyBug' && (
-          <CrazyBugDrawing numberOfGuesses={incorrectLetters.length} />
+          <CrazyBugDraw2 numberOfGuesses={incorrectLetters.length} />
         )}
         {activeBug === 'GoofyBug' && (
-          <GoofyBugDrawing numberOfGuesses={incorrectLetters.length} />
+          <GoofyBugDraw2 numberOfGuesses={incorrectLetters.length} />
+        )}
+        {activeBug === 'HoboBug' && (
+          <HoboAntDraw2 numberOfGuesses={incorrectLetters.length} />
         )}
 
         <BugWord

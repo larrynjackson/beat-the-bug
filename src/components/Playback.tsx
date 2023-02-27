@@ -1,8 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-
-const canvasStyle = {
-  border: '1px solid black',
-};
+import React, { useEffect } from 'react';
 
 export type point = {
   x: number | undefined;
@@ -15,6 +11,8 @@ type PlaybackProps = {
   points: point[];
   fcolor: string;
   ocolor: string;
+  drawTool: string;
+  appCanvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
 };
 
 export function Playback({
@@ -23,17 +21,14 @@ export function Playback({
   points,
   fcolor,
   ocolor,
+  drawTool,
+  appCanvasRef,
 }: PlaybackProps) {
-  let canvasRef = useRef<HTMLCanvasElement | null>(null);
-  let canvasCtxRef = React.useRef<CanvasRenderingContext2D | null>(null);
-
   useEffect(() => {
     function onDraw() {
-      if (!canvasRef.current) return;
-      canvasCtxRef.current = canvasRef.current.getContext('2d');
-      let ctx = canvasCtxRef.current;
+      var ctx = appCanvasRef.current!.getContext('2d');
 
-      if (points[0].x === 0 && points[0].y === 0) {
+      if (points == null || (points[0].x === 0 && points[0].y === 0)) {
         ctx!.clearRect(0, 0, width, height);
         return;
       }
@@ -61,40 +56,29 @@ export function Playback({
     }
 
     function fillPolygon() {
-      if (!canvasRef.current) return;
-      canvasCtxRef.current = canvasRef.current.getContext('2d');
-      let ctx = canvasCtxRef.current;
+      var ctx = appCanvasRef.current!.getContext('2d');
 
-      ctx!.fillStyle = fcolor; // all css colors are accepted by this property
+      ctx!.fillStyle = fcolor;
 
       var point = points[0];
 
       ctx!.beginPath();
-      ctx!.moveTo(point.x!, point.y!); // point 1
+      ctx!.moveTo(point.x!, point.y!);
 
       for (var i = 1; i < points.length; ++i) {
         point = points[i];
         ctx!.lineTo(point.x!, point.y!);
       }
 
-      ctx!.closePath(); // go back to point 1
+      ctx!.closePath();
       ctx!.fill();
     }
 
     onDraw();
-    fillPolygon();
+    if (drawTool === 'hand' || drawTool === 'poly') {
+      fillPolygon();
+    }
   });
 
-  return (
-    <div>
-      <div>
-        <canvas
-          style={canvasStyle}
-          ref={canvasRef}
-          width={width}
-          height={height}
-        />
-      </div>
-    </div>
-  );
+  return <div></div>;
 }
