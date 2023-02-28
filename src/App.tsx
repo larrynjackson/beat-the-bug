@@ -24,6 +24,9 @@ import { stateWords } from './data/stateList';
 import { words } from './data/wordList';
 import { countryWords } from './data/countryList';
 import { animalWords } from './data/amimalList';
+import { misusedWords } from './data/misusedList';
+import { misspelledWords } from './data/misspelledList';
+import { confusedWords } from './data/confusedList';
 
 // temp site: https://neon-horse-18b33a.netlify.app
 
@@ -211,6 +214,18 @@ function App() {
               </button>,
               <button onClick={() => handleUpdateList(countryWords)}>
                 Countries
+              </button>,
+
+              <button onClick={() => handleUpdateList(confusedWords)}>
+                Confused
+              </button>,
+
+              <button onClick={() => handleUpdateList(misusedWords)}>
+                Misused
+              </button>,
+
+              <button onClick={() => handleUpdateList(misspelledWords)}>
+                Misspelled
               </button>,
               <div
                 style={{
